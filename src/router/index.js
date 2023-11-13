@@ -63,21 +63,19 @@ const router = createRouter({
           component: () => import("@/components/qnaBoard/QnaBoardList.vue"),
         },
         {
-          path: "view/:articleno",
+          path: "view/:questionArticleNo",
           name: "qna-board-view",
           component: () => import("@/components/qnaBoard/QnaBoardDetail.vue"),
         },
         {
           path: "write/question",
           name: "qna-board-write-question",
-          component: () =>
-            import("@/components/qnaBoard/QnaBoardQuestionWrite.vue"),
+          component: () => import("@/components/qnaBoard/QnaBoardQuestionWrite.vue"),
         },
         {
           path: "write/answer",
           name: "qna-board-write-answer",
-          component: () =>
-            import("@/components/qnaBoard/QnaBoardAnswerWrite.vue"),
+          component: () => import("@/components/qnaBoard/QnaBoardAnswerWrite.vue"),
         },
         {
           path: "modify",

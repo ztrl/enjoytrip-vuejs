@@ -37,11 +37,12 @@ const changeKey = (val) => {
 const getArticleList = () => {
   console.log("서버에서 글목록 얻어오자!!!", param.value);
   listQna(
-    param,
+    param.value,
     ({ data }) => {
+      console.log(data);
       qnaBoards.value = data.qnaBoards;
-      currentPage.value = data.pagaNavigation.currentPage;
-      totalPage.value = data.pagaNavigation.totalPageCount;
+      currentPage.value = data.pageNavigation.currentPage;
+      totalPage.value = data.pageNavigation.totalPageCount;
     },
     (error) => {
       console.log(error);
@@ -57,7 +58,7 @@ const onPageChange = (val) => {
 };
 
 const moveWrite = () => {
-  router.push({ name: "qna-board-write" });
+  router.push({ name: "qna-board-write-question" });
 };
 </script>
 

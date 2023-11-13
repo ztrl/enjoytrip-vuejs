@@ -16,7 +16,7 @@ defineProps({ qnaBoard: Object });
         {{ qnaBoard.board.title }}
       </router-link>
     </td>
-    <td>{{ qnaBoard.board.userName }}</td>
+    <td>{{ qnaBoard.board.userId }}</td>
     <td>{{ qnaBoard.board.hit }}</td>
     <td>{{ qnaBoard.board.registerTime }}</td>
   </tr>
