@@ -58,7 +58,7 @@ const onPageChange = (val) => {
 };
 
 const moveWrite = () => {
-  router.push({ name: "qna-board-write-question", params: { action: 'write'} });
+  router.push({ name: "qna-board-write-question" });
 };
 </script>
 

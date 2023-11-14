@@ -28,7 +28,7 @@ function registAnswer(answer, success, fail) {
 
 function modifyQna(article, success, fail) {
   local
-    .put(`/qnaboard/modifiy`, JSON.stringify(article))
+    .put(`/qnaboard/modify`, JSON.stringify(article))
     .then(success)
     .catch(fail);
 }

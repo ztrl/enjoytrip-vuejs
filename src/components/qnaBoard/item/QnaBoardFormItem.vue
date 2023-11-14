@@ -1,13 +1,17 @@
 <script setup>
 import { ref, watch } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { registQuestion, detailQna, modifyQna } from "@/api/qnaBoard";
 
 const router = useRouter();
-const route = useRoute();
 
-const props = defineProps({ action: String });
-console.log(props.action);
+const props = defineProps({
+  questionArticleNo: String,
+  answerArticleNo: String,
+});
+
+console.log("prop: " + props);
+
 const isUseId = ref(false);
 
 const board = ref({
@@ -17,14 +21,30 @@ const board = ref({
   userId: "",
 });
 
-if (props.action === "modify") {
-  let { questionArticleNo } = route.params;
+if (props.questionArticleNo) {
+  let questionArticleNo = props.questionArticleNo;
   console.log(questionArticleNo + "번글 얻어와서 수정할거야");
   detailQna(
     questionArticleNo,
     ({ data }) => {
       console.log(data);
       board.value = data.question;
+    },
+    (error) => {
+      console.log(error);
+    }
+  );
+  isUseId.value = true;
+}
+
+if (props.answerArticleNo) {
+  let answerArticleNo = props.answerArticleNo;
+  console.log(answerArticleNo + "번글 얻어와서 수정할거야");
+  detailQna(
+    answerArticleNo,
+    ({ data }) => {
+      console.log(data);
+      board.value = data.answer;
     },
     (error) => {
       console.log(error);
@@ -74,9 +94,11 @@ function writeArticle() {
     board.value,
     ({ data }) => {
       console.log(data);
-    }, error => {
+    },
+    (error) => {
       console.log(error);
-    });
+    }
+  );
 }
 
 function updateArticle() {
@@ -85,9 +107,11 @@ function updateArticle() {
     board.value,
     ({ data }) => {
       console.log(data);
-    }, error => {
+    },
+    (error) => {
       console.log(error);
-    });
+    }
+  );
 }
 
 function moveList() {
@@ -109,18 +133,37 @@ function moveList() {
     </div>
     <div class="mb-3">
       <label for="subject" class="form-label">제목 : </label>
-      <input type="text" class="form-control" v-model="board.title" placeholder="제목..." />
+      <input
+        type="text"
+        class="form-control"
+        v-model="board.title"
+        placeholder="제목..."
+      />
     </div>
     <div class="mb-3">
       <label for="content" class="form-label">내용 : </label>
-      <textarea class="form-control" v-model="board.content" rows="10"></textarea>
+      <textarea
+        class="form-control"
+        v-model="board.content"
+        rows="10"
+      ></textarea>
     </div>
     <div class="col-auto text-center">
-      <button type="submit" class="btn btn-outline-primary mb-3" v-if="action === 'regist'">
+      <button
+        type="submit"
+        class="btn btn-outline-primary mb-3"
+        v-if="action === 'regist'"
+      >
         글작성
       </button>
-      <button type="submit" class="btn btn-outline-success mb-3" v-else>글수정</button>
-      <button type="button" class="btn btn-outline-danger mb-3 ms-1" @click="moveList">
+      <button type="submit" class="btn btn-outline-success mb-3" v-else>
+        글수정
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-danger mb-3 ms-1"
+        @click="moveList"
+      >
         목록으로이동...
       </button>
     </div>

@@ -3,8 +3,8 @@ import QnaBoardFormItem from "./item/QnaBoardFormItem.vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
-const { action } = route.params;
-console.log("머냐", action);
+const { questionArticleNo } = route.params;
+console.log("게시글 번호 있?", questionArticleNo);
 </script>
 
 <template>
@@ -16,7 +16,7 @@ console.log("머냐", action);
         </h2>
       </div>
       <div class="col-lg-10 text-start">
-        <QnaBoardFormItem :action="action" />
+        <QnaBoardFormItem :questionArticleNo="questionArticleNo" />
       </div>
     </div>
   </div>
