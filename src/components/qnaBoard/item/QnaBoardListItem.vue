@@ -4,21 +4,21 @@ defineProps({ qnaBoard: Object });
 
 <template>
   <tr class="text-center">
-    <th scope="row">{{ qnaBoard.board.articleNo }}</th>
+    <th scope="row">{{ qnaBoard.articleNo }}</th>
     <td class="text-start">
       <router-link
         :to="{
           name: 'qna-board-view',
-          params: { questionArticleNo: qnaBoard.board.articleNo },
+          params: { questionArticleNo: qnaBoard.articleNo },
         }"
         class="article-title link-dark"
       >
-        {{ qnaBoard.board.title }}
+        {{ qnaBoard.title }}
       </router-link>
     </td>
-    <td>{{ qnaBoard.board.userId }}</td>
-    <td>{{ qnaBoard.board.hit }}</td>
-    <td>{{ qnaBoard.board.registerTime }}</td>
+    <td>{{ qnaBoard.userId }}</td>
+    <td>{{ qnaBoard.hit }}</td>
+    <td>{{ qnaBoard.registerTime }}</td>
   </tr>
 </template>
 

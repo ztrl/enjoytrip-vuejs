@@ -1,13 +1,13 @@
 <script setup>
 import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { registQuestion } from "@/api/qnaBoard";
+import { registQuestion, detailQna, modifyQna } from "@/api/qnaBoard";
 
 const router = useRouter();
 const route = useRoute();
 
-const props = defineProps({ type: String });
-
+const props = defineProps({ action: String });
+console.log(props.action);
 const isUseId = ref(false);
 
 const board = ref({
@@ -17,10 +17,19 @@ const board = ref({
   userId: "",
 });
 
-if (props.type === "modify") {
-  let { articleno } = route.params;
-  console.log(articleno + "번글 얻어와서 수정할거야");
-  // API 호출
+if (props.action === "modify") {
+  let { questionArticleNo } = route.params;
+  console.log(questionArticleNo + "번글 얻어와서 수정할거야");
+  detailQna(
+    questionArticleNo,
+    ({ data }) => {
+      console.log(data);
+      board.value = data.question;
+    },
+    (error) => {
+      console.log(error);
+    }
+  );
   isUseId.value = true;
 }
 
@@ -55,7 +64,7 @@ function onSubmit() {
   } else if (contentErrMsg.value) {
     alert(contentErrMsg.value);
   } else {
-    props.type === "regist" ? writeArticle() : updateArticle();
+    props.action === "regist" ? writeArticle() : updateArticle();
   }
 }
 
@@ -72,7 +81,13 @@ function writeArticle() {
 
 function updateArticle() {
   console.log(board.value.articleNo + "번글 수정하자!!", board.value);
-   // API 호출
+  modifyQna(
+    board.value,
+    ({ data }) => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    });
 }
 
 function moveList() {
@@ -101,7 +116,7 @@ function moveList() {
       <textarea class="form-control" v-model="board.content" rows="10"></textarea>
     </div>
     <div class="col-auto text-center">
-      <button type="submit" class="btn btn-outline-primary mb-3" v-if="type === 'regist'">
+      <button type="submit" class="btn btn-outline-primary mb-3" v-if="action === 'regist'">
         글작성
       </button>
       <button type="submit" class="btn btn-outline-success mb-3" v-else>글수정</button>
