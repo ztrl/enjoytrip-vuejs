@@ -80,7 +80,7 @@ const router = createRouter({
         {
           path: "modify",
           name: "qna-board-modify",
-          component: () => import("@/components/board/BoardModify.vue"),
+          component: () => import("@/components/qnaBoard/QnaBoardQuestionWrite.vue"),
         },
       ],
     },

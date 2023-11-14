@@ -1,5 +1,10 @@
 <script setup>
 import QnaBoardFormItem from "./item/QnaBoardFormItem.vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+const { action } = route.params;
+console.log("머냐", action);
 </script>
 
 <template>
@@ -11,7 +16,7 @@ import QnaBoardFormItem from "./item/QnaBoardFormItem.vue";
         </h2>
       </div>
       <div class="col-lg-10 text-start">
-        <QnaBoardFormItem type="regist" />
+        <QnaBoardFormItem :action="action" />
       </div>
     </div>
   </div>

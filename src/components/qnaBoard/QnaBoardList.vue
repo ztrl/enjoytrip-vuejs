@@ -58,7 +58,7 @@ const onPageChange = (val) => {
 };
 
 const moveWrite = () => {
-  router.push({ name: "qna-board-write-question" });
+  router.push({ name: "qna-board-write-question", params: { action: 'write'} });
 };
 </script>
 
@@ -115,7 +115,7 @@ const moveWrite = () => {
           <tbody>
             <QnaBoardListItem
               v-for="qnaBoard in qnaBoards"
-              :key="qnaBoard.board.articleNo"
+              :key="qnaBoard.articleNo"
               :qnaBoard="qnaBoard"
             ></QnaBoardListItem>
           </tbody>
